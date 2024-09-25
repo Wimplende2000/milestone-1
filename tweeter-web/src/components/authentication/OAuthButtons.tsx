@@ -1,9 +1,6 @@
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import useToastListener from "../toaster/ToastListenerHook";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-interface Props{
-    onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-}
 
 const OAuthButtons = () => {
     const { displayInfoMessage } = useToastListener();

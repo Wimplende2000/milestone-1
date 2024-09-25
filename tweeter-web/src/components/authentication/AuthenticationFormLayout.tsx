@@ -16,11 +16,6 @@ interface Props {
 }
 
 const AuthenticationFormLayout = (props: Props) => {
-  const { displayInfoMessage } = useToastListener();
-
-  const displayInfoMessageWithDarkBackground = (message: string): void => {
-    displayInfoMessage(message, 3000, "text-white bg-primary");
-  };
 
   return (
     <div className={props.isLoading ? "loading" : ""}>
