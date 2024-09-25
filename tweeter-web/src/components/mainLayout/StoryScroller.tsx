@@ -79,6 +79,7 @@ const StoryScroller = () => {
     return FakeData.instance.getPageOfStatuses(lastItem, pageSize);
   };
 
+
   return (
     <div className="container px-0 overflow-visible vh-100">
       <InfiniteScroll
@@ -88,7 +89,7 @@ const StoryScroller = () => {
         hasMore={hasMoreItems}
         loader={<h4>Loading...</h4>}
       >
-              <StatusItem status={items}/>
+         <StatusItem status={items}/>
 
       </InfiniteScroll>
     </div>

@@ -8,6 +8,7 @@ import AuthenticationFormLayout from "../AuthenticationFormLayout";
 import { AuthToken, FakeData, User } from "tweeter-shared";
 import { Buffer } from "buffer";
 import useToastListener from "../../toaster/ToastListenerHook";
+import AuthenticationFields from "../AuthenticationFields ";
 
 const Register = () => {
   const [firstName, setFirstName] = useState("");
@@ -54,7 +55,6 @@ const Register = () => {
       reader.onload = (event: ProgressEvent<FileReader>) => {
         const imageStringBase64 = event.target?.result as string;
 
-        // Remove unnecessary file metadata from the start of the string.
         const imageStringBase64BufferContents =
           imageStringBase64.split("base64,")[1];
 
@@ -67,7 +67,6 @@ const Register = () => {
       };
       reader.readAsDataURL(file);
 
-      // Set image file extension (and move to a separate method)
       const fileExtension = getFileExtension(file);
       if (fileExtension) {
         setImageFileExtension(fileExtension);
@@ -114,11 +113,9 @@ const Register = () => {
     userImageBytes: Uint8Array,
     imageFileExtension: string
   ): Promise<[User, AuthToken]> => {
-    // Not neded now, but will be needed when you make the request to the server in milestone 3
     const imageStringBase64: string =
       Buffer.from(userImageBytes).toString("base64");
 
-    // TODO: Replace with the result of calling the server
     const user = FakeData.instance.firstUser;
 
     if (user === null) {
@@ -155,29 +152,13 @@ const Register = () => {
           />
           <label htmlFor="lastNameInput">Last Name</label>
         </div>
-        <div className="form-floating">
-          <input
-            type="text"
-            className="form-control"
-            size={50}
-            id="aliasInput"
-            placeholder="name@example.com"
-            onKeyDown={registerOnEnter}
-            onChange={(event) => setAlias(event.target.value)}
-          />
-          <label htmlFor="aliasInput">Alias</label>
-        </div>
-        <div className="form-floating">
-          <input
-            type="password"
-            className="form-control"
-            id="passwordInput"
-            placeholder="Password"
-            onKeyDown={registerOnEnter}
-            onChange={(event) => setPassword(event.target.value)}
-          />
-          <label htmlFor="passwordInput">Password</label>
-        </div>
+        <AuthenticationFields
+        alias={alias}
+        password={password}
+        onAliasChange={(event) => setAlias(event.target.value)}
+        onPasswordChange={(event) => setPassword(event.target.value)}
+        onKeyDown={registerOnEnter}
+      />
         <div className="form-floating mb-3">
           <input
             type="file"

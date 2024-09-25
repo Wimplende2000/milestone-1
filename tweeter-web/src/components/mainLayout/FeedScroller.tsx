@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { UserInfoContext } from "../userInfo/UserInfoProvider";
-import { AuthToken, FakeData, Status } from "tweeter-shared";
+import { AuthToken, FakeData, Status, User } from "tweeter-shared";
 import { useState, useEffect } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import useToastListener from "../toaster/ToastListenerHook";
@@ -19,7 +19,7 @@ const FeedScroller = () => {
   const addItems = (newItems: Status[]) =>
     setNewItems(newItems);
   
-  const { displayedUser, authToken } =
+  const { displayedUser,authToken } =
     useContext(UserInfoContext);
 
   // Initialize the component whenever the displayed user changes
